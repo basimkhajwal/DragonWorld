@@ -1,0 +1,23 @@
+## Gitignore files
+
+## Mac setttings
+.DS_Store
+._*
+
+## Jamie's code...
+old/
+
+## Build details
+build/
+
+## Vim files
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+## session
+Session.vim
+# temporary
+.netrwhist
+*~
+## auto-generated tag files
+tags
