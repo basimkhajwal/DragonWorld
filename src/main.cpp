@@ -1,23 +1,30 @@
 // Include standard headers
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
-// Include GLEW
+// Include GLEW and GLFW
 #include <GL/glew.h>
-
-// Include GLFW
 #include <GLFW/glfw3.h>
+
+using namespace std;
+
 GLFWwindow* window;
+
+static const GLfloat g_vertex_buffer_data[] = {
+    -1, -1, 0,
+    1, -1, 0,
+    0, 1, 0
+};
 
 int main( void ) {
 	// Initialise GLFW
-	if( !glfwInit() )
-	{
+	if( !glfwInit() ) {
 		fprintf( stderr, "Failed to initialize GLFW\n" );
 		getchar();
 		return -1;
 	}
 
+    /* Initialise window constraints */
 	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
