@@ -39,6 +39,11 @@ set(PROJECT_LIBRARIES
     glfw
     GLEW_1130)
 
+# Set definitions for Visual Studio
+add_definitions(
+    -DGLEW_STATIC
+    -D_CRT_SECURE_NO_WARNINGS)
+
 # Create, build and link the one target executable
 add_executable(DragonWorld ${PROJECT_SOURCES})
 target_link_libraries(DragonWorld ${PROJECT_LIBRARIES})
