@@ -2,8 +2,11 @@
 #include <vector>
 #include <fstream>
 #include <iostream>
-#include <utils.h>
+
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+
+#include <utils.h>
 
 using namespace std;
 
@@ -17,10 +20,10 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     ifstream vertexShaderStream(vertexFilePath, ios::in);
     if (vertexShaderStream.is_open()) {
         for (string line; getline(vertexShaderStream, line);) {
-            vertexShaderCode += "\n" + line;
+            vertexShaderCode += line + "\n";
         }
     } else {
-        cout << "Vertex shader " << vertexShaderID << " not found" << endl;
+        cout << "Vertex shader " << vertexFilePath << " not found" << endl;
         getchar();
         return 0;
     }
@@ -29,10 +32,10 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     ifstream fragmentShaderStream(fragmentFilePath, ios::in);
     if (fragmentShaderStream.is_open()) {
         for (string line; getline(fragmentShaderStream, line);) {
-            fragmentShaderCode += "\n" + line;
+            fragmentShaderCode += line + "\n";
         }
     } else {
-        cout << "fragment shader " << vertexShaderID << " not found" << endl;
+        cout << "Fragment shader " << fragmentFilePath << " not found" << endl;
         getchar();
         return 0;
     }
@@ -41,7 +44,7 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     int infoLogLength;
 
     //Compile the shaders
-    cout << "Compiling vertex shader " << vertexShaderID << ":"<< endl;
+    cout << "Compiling vertex shader " << vertexFilePath << ":"<< endl;
     char const* vertexSourcePointer = vertexShaderCode.c_str();
     glShaderSource(vertexShaderID, 1, &vertexSourcePointer, NULL);
     glCompileShader(vertexShaderID);
@@ -56,7 +59,7 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     }
 
     //Compile the fragment shader
-    cout << "Compiling fragment shader " << fragmentShaderID << ":"<< endl;
+    cout << "Compiling fragment shader " << fragmentFilePath << ":"<< endl;
     char const* fragmentSourcePointer = fragmentShaderCode.c_str();
     glShaderSource(fragmentShaderID, 1, &fragmentSourcePointer, NULL);
     glCompileShader(fragmentShaderID);
@@ -85,12 +88,11 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
         glGetProgramInfoLog(programID, infoLogLength, NULL, &programErrorMsg[0]);
         printf("%s\n", &programErrorMsg[0]);
     }
-
     //Cleanup
-    glDetachShader(programID, vertexShaderID);
-    glDetachShader(programID, fragmentShaderID);
+    //glDetachShader(programID, vertexShaderID);
+    //glDetachShader(programID, fragmentShaderID);
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
 
-    return 0;
+    return programID;
 }

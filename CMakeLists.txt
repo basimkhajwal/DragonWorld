@@ -32,6 +32,9 @@ include_directories(
 # Create lists for all the sources and libraries needed
 set(PROJECT_SOURCES
     src/main.cpp # Temporary
+    src/utils.cpp
+    src/shaders/SimpleVertexShader.txt
+    src/shaders/SimpleFragmentShader.txt
     )
 
 set(PROJECT_LIBRARIES
