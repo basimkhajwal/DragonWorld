@@ -40,7 +40,6 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
         return 0;
     }
     
-    GLint result = GL_FALSE;
     int infoLogLength;
 
     //Compile the shaders
@@ -50,7 +49,6 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     glCompileShader(vertexShaderID);
 
     //Check vertex shader
-    glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &result);
     glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
     if (infoLogLength > 0) {
         vector<char> vertexErrorMsg(infoLogLength+1);
@@ -65,7 +63,6 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     glCompileShader(fragmentShaderID);
 
     //Check fragment shader
-    glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &result);
     glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
     if (infoLogLength > 0) {
         vector<char> fragmentErrorMsg(infoLogLength+1);
@@ -81,7 +78,6 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
     glLinkProgram(programID);
 
     //Check the program
-    glGetProgramiv(programID, GL_LINK_STATUS, &result);
     glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
     if (infoLogLength > 0) {
         vector<char> programErrorMsg(infoLogLength+1);
@@ -89,8 +85,8 @@ GLuint LoadShaders(const char* vertexFilePath, const char* fragmentFilePath) {
         printf("%s\n", &programErrorMsg[0]);
     }
     //Cleanup
-    //glDetachShader(programID, vertexShaderID);
-    //glDetachShader(programID, fragmentShaderID);
+    glDetachShader(programID, vertexShaderID);
+    glDetachShader(programID, fragmentShaderID);
     glDeleteShader(vertexShaderID);
     glDeleteShader(fragmentShaderID);
 

@@ -20,18 +20,17 @@ add_subdirectory(external)
 
 # Add source code and headers
 add_subdirectory(src)
-add_subdirectory(include)
 
 # Include all necessary directories
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/external/glfw-3.2/include
     ${CMAKE_SOURCE_DIR}/external/glew-1.13.0/include
     )
 
-# Create lists for all the sources and libraries needed
+# Create lists for all the sources, headers and libraries needed
 set(PROJECT_SOURCES
-    src/main.cpp # Temporary
+    src/main.cpp
     src/utils.cpp
     src/shaders/SimpleVertexShader.txt
     src/shaders/SimpleFragmentShader.txt
