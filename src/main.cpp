@@ -7,7 +7,7 @@
 #include <GLFW/glfw3.h>
 
 // Project headers
-#include <utils.h>
+#include <ShaderProgram.h>
 using namespace std;
 
 GLFWwindow* window;
@@ -47,7 +47,7 @@ int main( void ) {
 	}
 
     //Load shaders
-    GLuint programID = LoadShaders("assets/shaders/SimpleVertexShader.txt", "assets/shaders/SimpleFragmentShader.txt");
+    ShaderProgram simpleShader("assets/shaders/SimpleVertexShader.txt", "assets/shaders/SimpleFragmentShader.txt");
 
     GLfloat triangleVBOData[] = {
         -0.9f, -0.5f, 0.0f,
@@ -59,14 +59,14 @@ int main( void ) {
     glGenVertexArrays(1, &vertexArrayId);
     glGenBuffers(1, &vertexBuffer);
 
-    //Bind buffer
+    //Bind VAO
     glBindVertexArray(vertexArrayId);
 
     // Load triangle buffer
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(triangleVBOData), triangleVBOData, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glEnableVertexAttribArray(0);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -78,7 +78,7 @@ int main( void ) {
 		glClear( GL_COLOR_BUFFER_BIT);
 
 		// Draw nothing
-        glUseProgram(programID);
+        simpleShader.bind();
         glBindVertexArray(vertexArrayId);
         glDrawArrays(GL_TRIANGLES, 0, 3);
         glBindVertexArray(0);
@@ -88,8 +88,7 @@ int main( void ) {
 		glfwPollEvents();
 
 	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS &&
-		   glfwWindowShouldClose(window) == 0 );
+	while( glfwGetKey(window, GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(window) == 0 );
 
 	// Close OpenGL window and terminate GLFW
 	glfwTerminate();

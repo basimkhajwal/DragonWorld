@@ -32,6 +32,7 @@ include_directories(
 set(PROJECT_SOURCES
     src/main.cpp
     src/utils.cpp
+    src/ShaderProgram.cpp
     )
 
 set(PROJECT_LIBRARIES
