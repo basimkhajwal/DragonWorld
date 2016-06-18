@@ -32,8 +32,6 @@ include_directories(
 set(PROJECT_SOURCES
     src/main.cpp
     src/utils.cpp
-    src/shaders/SimpleVertexShader.txt
-    src/shaders/SimpleFragmentShader.txt
     )
 
 set(PROJECT_LIBRARIES
@@ -45,6 +43,9 @@ set(PROJECT_LIBRARIES
 add_definitions(
     -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS)
+
+# Copy across asset files if any have been changed
+file(COPY assets DESTINATION .)
 
 # Create, build and link the one target executable
 add_executable(DragonWorld ${PROJECT_SOURCES})

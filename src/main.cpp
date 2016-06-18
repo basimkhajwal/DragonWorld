@@ -47,7 +47,7 @@ int main( void ) {
 	}
 
     //Load shaders
-    GLuint programID = LoadShaders("../src/shaders/SimpleVertexShader.txt", "../src/shaders/SimpleFragmentShader.txt");
+    GLuint programID = LoadShaders("assets/shaders/SimpleVertexShader.txt", "assets/shaders/SimpleFragmentShader.txt");
 
     GLfloat triangleVBOData[] = {
         -0.9f, -0.5f, 0.0f,
