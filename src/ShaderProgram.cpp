@@ -2,12 +2,7 @@
 #include <fstream>
 #include <cstdio>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
-
 #include <ShaderProgram.h>
-
-using namespace std;
 
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
 

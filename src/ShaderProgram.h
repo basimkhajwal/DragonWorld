@@ -37,6 +37,11 @@ public:
      * */
     ~ShaderProgram();
 
+    /*
+     * Return the program ID for this shader
+     * */
+    GLuint getProgramID() { return this->programID; }
+
     void bind();
     void unbind();
 };

@@ -1,6 +1,7 @@
-# Dragon World
-# Originally by Jamie
-# Updated to a cross platform Cmake project by Basim
+# Dungeon Warrior
+# 
+# Test OpenGL program using GLFW
+# by Basim Khajwal
 
 cmake_minimum_required(VERSION 2.8)
 project(DragonWorld)
@@ -26,13 +27,15 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/external/glfw-3.2/include
     ${CMAKE_SOURCE_DIR}/external/glew-1.13.0/include
+    ${CMAKE_SOURCE_DIR}/external/glm
     )
 
 # Create lists for all the sources, headers and libraries needed
 set(PROJECT_SOURCES
     src/main.cpp
-    src/utils.cpp
     src/ShaderProgram.cpp
+    src/Window.cpp
+    src/Camera.cpp
     )
 
 set(PROJECT_LIBRARIES

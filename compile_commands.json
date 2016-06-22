@@ -1,13 +1,23 @@
 [
 {
   "directory": "/Users/Basim/Documents/C++/DungeonWarrior/build",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include    -o CMakeFiles/DragonWorld.dir/src/main.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/main.cpp",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glm    -o CMakeFiles/DragonWorld.dir/src/main.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/main.cpp",
   "file": "/Users/Basim/Documents/C++/DungeonWarrior/src/main.cpp"
 },
 {
   "directory": "/Users/Basim/Documents/C++/DungeonWarrior/build",
-  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include    -o CMakeFiles/DragonWorld.dir/src/utils.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/utils.cpp",
-  "file": "/Users/Basim/Documents/C++/DungeonWarrior/src/utils.cpp"
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glm    -o CMakeFiles/DragonWorld.dir/src/ShaderProgram.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/ShaderProgram.cpp",
+  "file": "/Users/Basim/Documents/C++/DungeonWarrior/src/ShaderProgram.cpp"
+},
+{
+  "directory": "/Users/Basim/Documents/C++/DungeonWarrior/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glm    -o CMakeFiles/DragonWorld.dir/src/Window.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/Window.cpp",
+  "file": "/Users/Basim/Documents/C++/DungeonWarrior/src/Window.cpp"
+},
+{
+  "directory": "/Users/Basim/Documents/C++/DungeonWarrior/build",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -DGLEW_STATIC -D_CRT_SECURE_NO_WARNINGS -I/Users/Basim/Documents/C++/DungeonWarrior/src -I/Users/Basim/Documents/C++/DungeonWarrior/external/glfw-3.2/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glew-1.13.0/include -I/Users/Basim/Documents/C++/DungeonWarrior/external/glm    -o CMakeFiles/DragonWorld.dir/src/Camera.cpp.o -c /Users/Basim/Documents/C++/DungeonWarrior/src/Camera.cpp",
+  "file": "/Users/Basim/Documents/C++/DungeonWarrior/src/Camera.cpp"
 },
 {
   "directory": "/Users/Basim/Documents/C++/DungeonWarrior/build/external",
