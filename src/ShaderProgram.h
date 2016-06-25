@@ -1,9 +1,10 @@
+#pragma once
+
 #include <string>
+using namespace std;
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
-using namespace std;
 
 /*
  * Utility class to manage a vertex and fragment shader

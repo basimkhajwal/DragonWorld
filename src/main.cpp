@@ -1,5 +1,6 @@
 // Include standard headers
 #include <cstdio>
+#include <cmath>
 #include <cstdlib>
 using namespace std;
 
@@ -15,23 +16,8 @@ using namespace glm;
 // Project headers
 #include <ShaderProgram.h>
 #include <Window.h>
-
-mat4 projection, view, model, mvp;
-vec3 cameraPosition(0, 0, 10);
-
-void keyCallback(GLFWwindow* w, int key, int scancode, int action, int mode) {
-
-    if (action != GLFW_PRESS) return;
-
-    if (key == GLFW_KEY_Q) cameraPosition.x++;
-    if (key == GLFW_KEY_W) cameraPosition.x--;
-    if (key == GLFW_KEY_A) cameraPosition.y++;
-    if (key == GLFW_KEY_S) cameraPosition.y--;
-    if (key == GLFW_KEY_Z) cameraPosition.z++;
-    if (key == GLFW_KEY_X) cameraPosition.z--;
-    view = lookAt(cameraPosition, vec3(0,0,0), vec3(0,1,0));
-    mvp = projection * view * model;
-}
+#include <Constants.h>
+#include <Camera.h>
 
 /* Cube vertex data */
 static const GLfloat g_vertex_buffer_data[] = {
@@ -113,22 +99,45 @@ static const GLfloat g_color_buffer_data[] = {
     0.982f,  0.099f,  0.879f
 };
 
+Camera camera(4.0f/3, vec3(0, 0, 5), 0, M_PI);
+
+void keyCallback(GLFWwindow* w, int key, int scancode, int action, int mode) {
+
+    if (action != GLFW_PRESS) return;
+    float x = 0,y = 0,z = 0;
+    if (key == GLFW_KEY_Q) x++;
+    if (key == GLFW_KEY_W) x--;
+    if (key == GLFW_KEY_A) y++;
+    if (key == GLFW_KEY_S) y--;
+    if (key == GLFW_KEY_Z) z++;
+    if (key == GLFW_KEY_X) z--;
+
+    if (x || y || z) {
+        camera.translate(x, y, z);
+    }
+
+    float v = 0, h = 0;
+    if (key == GLFW_KEY_O) v++;
+    if (key == GLFW_KEY_P) v--;
+    if (key == GLFW_KEY_K) h++;
+    if (key == GLFW_KEY_L) h--;
+
+    if (v || h) {
+        camera.rotate(v*0.05f*M_PI, h*0.05f*M_PI);
+    }
+}
+
 int main( void ) {
 	   
-    Window window = Window("Dungeon Warrior", 1000, 600);
+    Window window = Window(constants::SCREEN_TITLE, constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT);
     glfwSetKeyCallback(window.getWindow(), keyCallback);
 
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     glDepthFunc(GL_LESS);
     
     //Load shaders
     ShaderProgram simpleShader("assets/shaders/SimpleVertexShader.txt", "assets/shaders/SimpleFragmentShader.txt");
-
-    //Setup glm stuff
-    projection = perspective(radians(45.0f), 4.0f/3.0f, 0.1f, 100.0f);
-    view = lookAt(cameraPosition, vec3(0,0,0), vec3(0, 1, 0));
-    model = mat4(1.0f);
-    mvp = projection * view * model;
 
     GLuint matrixID = glGetUniformLocation(simpleShader.getProgramID(), "mvp");
 
@@ -161,7 +170,7 @@ int main( void ) {
         simpleShader.bind();
 
         //Set the uniform mvp matrix
-        glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]); 
+        glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera.getProjectionViewMatrix()[0][0]); 
 
         glBindVertexArray(vertexArrayId);
         glDrawArrays(GL_TRIANGLES, 0, 12*3);
