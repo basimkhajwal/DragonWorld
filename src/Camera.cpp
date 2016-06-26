@@ -40,7 +40,7 @@ void Camera::rotate(float vAngle, float hAngle) {
 void Camera::setAngle(float vAngle, float hAngle) {
     this->vAngle = vAngle;
     this->hAngle = hAngle;
-    dirty = true;   
+    dirty = true;
 }
 
 void Camera::update() {

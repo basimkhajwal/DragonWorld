@@ -9,6 +9,9 @@ project(DragonWorld)
 # Export compiler_commands.json for YCM vim plugin
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
+# Set C++11 standard
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
 # Project version
 set (DragonWorld_VERSION_MAJOR 1)
 set (DragonWorld_VERSION_MINOR 0)
@@ -36,6 +39,7 @@ set(PROJECT_SOURCES
     src/ShaderProgram.cpp
     src/Window.cpp
     src/Camera.cpp
+    src/Mesh.cpp
     )
 
 set(PROJECT_LIBRARIES

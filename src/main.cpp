@@ -2,6 +2,8 @@
 #include <cstdio>
 #include <cmath>
 #include <cstdlib>
+#include <vector>
+#include <iterator>
 using namespace std;
 
 // Include GLEW and GLFW
@@ -18,6 +20,7 @@ using namespace glm;
 #include <Window.h>
 #include <Constants.h>
 #include <Camera.h>
+#include <Mesh.h>
 
 /* Cube vertex data */
 static const GLfloat g_vertex_buffer_data[] = {
@@ -128,19 +131,19 @@ void keyCallback(GLFWwindow* w, int key, int scancode, int action, int mode) {
 }
 
 int main( void ) {
-	   
+
     Window window = Window(constants::SCREEN_TITLE, constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT);
     glfwSetKeyCallback(window.getWindow(), keyCallback);
 
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
-    glDepthFunc(GL_LESS);
-    
+    //glEnable(GL_CULL_FACE);
+    //glDepthFunc(GL_LESS);
+
     //Load shaders
     ShaderProgram simpleShader("assets/shaders/SimpleVertexShader.txt", "assets/shaders/SimpleFragmentShader.txt");
 
     GLuint matrixID = glGetUniformLocation(simpleShader.getProgramID(), "mvp");
-
+/*
     GLuint vertexArrayId, vertexBuffer, colorBuffer;
     glGenVertexArrays(1, &vertexArrayId);
     glGenBuffers(1, &vertexBuffer);
@@ -152,7 +155,7 @@ int main( void ) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
     glEnableVertexAttribArray(0);
-    
+
     glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data), g_color_buffer_data, GL_STATIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (GLvoid*)0);
@@ -160,25 +163,45 @@ int main( void ) {
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
+*/
+    vector<float> vertices = {
+        -1, 1, 0,
+        -1, -1, 0,
+        1, -1, 0,
+        1, 1, 0
+    };
 
+    vector<float> colours = {
+        1, 0, 0,
+        1, 0, 0,
+        0, 1, 0,
+        0, 1, 0
+    };
+
+    vector<int> indices = {
+        0, 1, 3,
+        3, 1, 2
+    };
+    
+    Mesh myMesh = Mesh(vertices, colours, indices);
     glClearColor(0.0f, 0.0f, 0.4f, 1.0f);
 
-	while (!window.isClosed()) {
+    while (!window.isClosed()) {
         window.clear();
 
-		// Draw the triangles
+        // Draw the triangles
         simpleShader.bind();
 
         //Set the uniform mvp matrix
-        glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera.getProjectionViewMatrix()[0][0]); 
-
-        glBindVertexArray(vertexArrayId);
-        glDrawArrays(GL_TRIANGLES, 0, 12*3);
-        glBindVertexArray(0);
+        glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera.getProjectionViewMatrix()[0][0]);
+        //glBindVertexArray(vertexArrayId);
+        //glDrawArrays(GL_TRIANGLES, 0, 12*3);
+        //glBindVertexArray(0);
+        myMesh.render();
         simpleShader.unbind();
 
         window.update();
     }
 
-	return 0;
+    return 0;
 }
