@@ -13,9 +13,9 @@ Window::Window(const char* title, int width, int height) {
 
     /* Initliase window */
 	// Initialise GLFW
-    printf("WINDOW:\tLoading GLFW...\n");
+    printf("WINDOW:\t\tLoading GLFW...\n");
 	if( !glfwInit() ) {
-        printf("WINDOW:\tERROR: failed to initialize GLFW\n" );
+        printf("WINDOW:\t\tERROR: failed to initialize GLFW\n" );
 		getchar();
 		return;
 	}
@@ -28,30 +28,30 @@ Window::Window(const char* title, int width, int height) {
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	// Open a window and create its OpenGL context
-    printf("WINDOW:\tCreating window sized\n");
+    printf("WINDOW:\t\tCreating window sized\n");
 	window = glfwCreateWindow(width, height, windowTitle, NULL, NULL);
 	if (window == NULL){
-        printf("WINDOW:\tERROR: Failed to open GLFW window\n");
+        printf("WINDOW:\t\tERROR: Failed to open GLFW window\n");
 		getchar();
 		return;
 	}
 	glfwMakeContextCurrent(window);
 
 	// Initialize GLEW
-    printf("WINDOW:\tInitialising GLEW...\n");
+    printf("WINDOW:\t\tInitialising GLEW...\n");
     glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK) {
-		printf("WINDOW:\tERROR: Failed to initialize GLEW\n");
+		printf("WINDOW:\t\tERROR: Failed to initialize GLEW\n");
 		getchar();
 		return;
 	}
 
-    printf("WINDOW:\tWindow loaded successfully\n");
+    printf("WINDOW:\t\tWindow loaded successfully\n");
     loaded = true;
 }
 
 Window::~Window() {
-    printf("WINDOW:\tTerminating window\n");
+    printf("WINDOW:\t\tTerminating window\n");
     glfwTerminate();
 }
 

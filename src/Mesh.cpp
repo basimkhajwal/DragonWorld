@@ -1,17 +1,26 @@
 #include <Mesh.h>
-#include <iostream>
+
+#include <cstdio>
 
 Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const vector<int>& indices) {
 
+    static int meshId = 0;
+    printf("MESH:\t\tCreating new mesh id: %d\n", meshId++);
+
+    /* Save vertex count and create a new VAO for this mesh */
     vertexCount = (int) indices.size();
     glGenVertexArrays(1, &vaoID);
     glBindVertexArray(vaoID);
 
+    /* Create the index buffer and the attribute buffers */
     indexBufferID = createIndexBuffer(indices);
     vertexBufferID = bindBufferToAttribute(vertices, 0, 3);
     colourBufferID = bindBufferToAttribute(colours, 1, 3);
 
+    /* Unbind VAO and VBO's */
     glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 Mesh::~Mesh() {
@@ -50,6 +59,5 @@ GLuint Mesh::createIndexBuffer(const vector<int>& indices) {
 void Mesh::render() {
     glBindVertexArray(vaoID);
     glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, (GLvoid*) 0);
-    //glDrawArrays(GL_TRIANGLES, 0, vertexCount);
     glBindVertexArray(0);
 }

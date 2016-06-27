@@ -10,11 +10,11 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
     this->fragmentID = this->loadShader(fragmentFile, GL_FRAGMENT_SHADER);
     
     if (this->vertexID == 0 || this->fragmentID == 0) {
-        printf("SHADER:\tCould not load program\n");
+        printf("SHADER:\t\tCould not load program\n");
         return;
     }
 
-    printf("SHADER:\tCreating and linking program....\n");
+    printf("SHADER:\t\tCreating and linking program....\n");
     this->programID = glCreateProgram();
     glAttachShader(this->programID, this->vertexID);
     glAttachShader(this->programID, this->fragmentID);
@@ -25,7 +25,7 @@ ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
     if (infoLogLength > 0) {
         vector<char> errorMessage(infoLogLength + 1);
         glGetProgramInfoLog(programID, 512, NULL, &errorMessage[0]);    
-        printf("SHADER:\tError linking program:\n%s\n", &errorMessage[0]);
+        printf("SHADER:\t\tError linking program:\n%s\n", &errorMessage[0]);
         return;
     }
 
@@ -48,13 +48,13 @@ GLuint ShaderProgram::loadShader(const char* source, GLenum shaderType) {
     string shaderFile = this->readFile(source);
 
     if (shaderFile == "") {
-        printf("SHADER:\tCould not load shader\n");
+        printf("SHADER:\t\tCould not load shader\n");
         return 0;
     }
 
     GLuint shaderID = glCreateShader(shaderType);
     
-    printf("SHADER:\tCompiling shader %s....\n", source);
+    printf("SHADER:\t\tCompiling shader %s....\n", source);
     char const* sourcePointer = shaderFile.c_str();
     glShaderSource(shaderID, 1, &sourcePointer, NULL);
     glCompileShader(shaderID);
@@ -65,7 +65,7 @@ GLuint ShaderProgram::loadShader(const char* source, GLenum shaderType) {
     if (infoLogLength > 0) {
         vector<char> errorMessage(infoLogLength + 1);
         glGetShaderInfoLog(shaderID, infoLogLength, NULL, &errorMessage[0]);
-        printf("SHADER:\tError compiling shader %s\n%s\n", source, &errorMessage[0]);
+        printf("SHADER:\t\tError compiling shader %s\n%s\n", source, &errorMessage[0]);
         return 0;
     }
 
@@ -77,7 +77,7 @@ string ShaderProgram::readFile(const char* source) {
     ifstream fin(source, ios::in);
 
     if (!fin.is_open()) {
-        printf("SHADER:\tError reading file %s\n", source);
+        printf("SHADER:\t\tError reading file %s\n", source);
         return "";
     }
 
