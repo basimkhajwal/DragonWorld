@@ -40,6 +40,9 @@ set(PROJECT_SOURCES
     src/Window.cpp
     src/Camera.cpp
     src/Mesh.cpp
+    src/GameState.cpp
+    src/Game.cpp
+    src/MainState.cpp
     )
 
 set(PROJECT_LIBRARIES
