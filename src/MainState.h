@@ -12,14 +12,19 @@ class MainState : public GameState {
     ShaderProgram* shader;
     GLuint matrixID;
 
+    float currentTime = 0;
+    int framesCounted = 0;
+
 public:
 
     MainState();
     ~MainState();
 
     void init();
-    void resize(int width, int height);
     void render(float delta);
+
+    void resize(int width, int height);
+    void keyCallback(int key, int action, int scancode, int mods);
 
     Camera* getCamera() { return camera; }
 };

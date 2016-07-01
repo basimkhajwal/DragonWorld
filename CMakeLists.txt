@@ -4,7 +4,7 @@
 # by Basim Khajwal
 
 cmake_minimum_required(VERSION 2.8)
-project(DragonWorld)
+project(DungeonWarrior)
 
 # Export compiler_commands.json for YCM vim plugin
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
@@ -13,8 +13,8 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 # Project version
-set (DragonWorld_VERSION_MAJOR 1)
-set (DragonWorld_VERSION_MINOR 0)
+set (DungeonWarrior_VERSION_MAJOR 1)
+set (DungeonWarrior_VERSION_MINOR 0)
 
 # Require the OpenGL package
 find_package(OpenGL REQUIRED)
@@ -59,5 +59,5 @@ add_definitions(
 file(COPY assets DESTINATION .)
 
 # Create, build and link the one target executable
-add_executable(DragonWorld ${PROJECT_SOURCES})
-target_link_libraries(DragonWorld ${PROJECT_LIBRARIES})
+add_executable(DungeonWarrior ${PROJECT_SOURCES})
+target_link_libraries(DungeonWarrior ${PROJECT_LIBRARIES})

@@ -1,5 +1,5 @@
 # Manage all the external dependencies
-# for the DragonWorld project
+# for the DungeonWarrior project
 #
 # Currently Includes:
 # - GLFW 3.2
