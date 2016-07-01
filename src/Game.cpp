@@ -28,13 +28,28 @@ namespace game {
         Window *window = nullptr;
         GameState* state = nullptr;
 
+        bool lostFocus = false;
+
         void keyCallback(GLFWwindow* w, int key, int scancode, int action, int mode) {
             state->keyCallback(key, scancode, action, mode);
         }
 
-        void resizeCallback(GLFWwindow* window, int width, int height) {
+        void resizeCallback(GLFWwindow* w, int width, int height) {
+            printf("WIDNOW:\t\tResized to %d x %d\n", width, height);
             state->resize(width, height);
             glViewport(0, 0, width, height);
+        }
+
+        void focusCallback(GLFWwindow* w, int focused) {
+            if (!focused) {
+                printf("WINDOW:\t\tLost focus\n");
+                state->pause();
+                lostFocus = true;
+            } else {
+                printf("WINDOW:\t\tGained focus\n");
+                state->resume();
+                lostFocus = false;
+            }
         }
 
         void initGame() {
@@ -42,7 +57,9 @@ namespace game {
             window = new Window(constants::SCREEN_TITLE, constants::SCREEN_WIDTH, constants::SCREEN_HEIGHT);
             glfwSetKeyCallback(window->getWindow(), keyCallback);
             glfwSetFramebufferSizeCallback(window->getWindow(), resizeCallback);
+            glfwSetWindowFocusCallback(window->getWindow(), focusCallback);
 
+            /* Enable V-Sync to fix FPS to monitor refresh rate */
             glfwSwapInterval(1);
 
             /* Set OpenGL flags */
@@ -61,6 +78,14 @@ namespace game {
                 currentTime = glfwGetTime();
                 delta = currentTime - startTime;
                 startTime = currentTime;
+
+                while (lostFocus) {
+                    printf("WINDOW:\t\tPausing until focus resumed\n");
+                    glfwWaitEvents();
+                    
+                    /* Reset time to prevent huge delta */
+                    startTime = glfwGetTime();
+                }
 
                 window->update();
                 window->clear();

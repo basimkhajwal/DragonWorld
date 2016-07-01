@@ -15,6 +15,10 @@ public:
     /* Listener functions */
     virtual void resize(int width, int height);
     virtual void keyCallback(int key, int action, int scancode, int mods) {  }
+
+    /* Focus listeners */
+    virtual void pause();
+    virtual void resume();
     
     const char* getName() const { return name; }
 };
