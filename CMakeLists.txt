@@ -28,6 +28,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/glfw-3.2/include
     ${CMAKE_SOURCE_DIR}/external/glew-1.13.0/include
     ${CMAKE_SOURCE_DIR}/external/glm
+    ${CMAKE_SOURCE_DIR}/external/soil
     )
 
 # Create lists for all the sources, headers and libraries needed
@@ -47,7 +48,9 @@ set(PROJECT_SOURCES
 set(PROJECT_LIBRARIES
     ${OPENGL_LIBRARY}
     glfw
-    GLEW_1130)
+    GLEW_1130
+    SOIL
+    )
 
 # Set definitions for Visual Studio
 add_definitions(

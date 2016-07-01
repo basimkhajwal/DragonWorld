@@ -47,3 +47,8 @@ set(GLEW_SOURCES
 
 add_library(GLEW_1130 STATIC ${GLEW_SOURCES})
 target_link_libraries(GLEW_1130 ${OPENGL_LIBRARY})
+
+# ------ SOIL ------------
+
+# Simply add the sub-directory
+add_subdirectory(soil)
