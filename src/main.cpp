@@ -1,5 +1,5 @@
 #include <Game.h>
-#include <MainState.h>
+#include <states/MainState.h>
 
 int main( void ) {
     return game::runGame(new MainState());

@@ -3,7 +3,7 @@
 #include <vector>
 using namespace std;
 
-#include <MainState.h>
+#include <states/MainState.h>
 #include <Constants.h>
 
 MainState::MainState() : GameState("Main") {

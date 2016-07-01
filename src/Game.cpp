@@ -14,10 +14,10 @@ using namespace std;
 using namespace glm;
 
 // Project headers
-#include <Window.h>
+#include <graphics/Window.h>
 #include <Camera.h>
 #include <Constants.h>
-#include <GameState.h>
+#include <states/GameState.h>
 #include <Game.h>
 
 namespace game {

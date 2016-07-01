@@ -1,8 +1,9 @@
 #include <vector>
 #include <fstream>
 #include <cstdio>
+using namespace std;
 
-#include <ShaderProgram.h>
+#include <graphics/ShaderProgram.h>
 
 ShaderProgram::ShaderProgram(const char* vertexFile, const char* fragmentFile) {
 

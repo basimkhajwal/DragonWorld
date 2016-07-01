@@ -1,9 +1,9 @@
 #pragma once
 
-#include <GameState.h>
-#include <Mesh.h>
 #include <Camera.h>
-#include <ShaderProgram.h>
+#include <states/GameState.h>
+#include <graphics/Mesh.h>
+#include <graphics/ShaderProgram.h>
 
 class MainState : public GameState {
 

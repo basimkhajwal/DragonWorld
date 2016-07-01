@@ -1,5 +1,7 @@
 #include <cstdio>
-#include <Window.h>
+using namespace std;
+
+#include <graphics/Window.h>
 
 Window::Window(const char* title, int width, int height) {
 

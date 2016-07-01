@@ -1,7 +1,7 @@
 #include <cstdio>
 using namespace std;
 
-#include <GameState.h>
+#include <states/GameState.h>
 
 GameState::GameState(const char* name) : name(name) { }
 

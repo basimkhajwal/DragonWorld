@@ -22,9 +22,6 @@ find_package(OpenGL REQUIRED)
 # Add external dependencies
 add_subdirectory(external)
 
-# Add source code and headers
-add_subdirectory(src)
-
 # Include all necessary directories
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
@@ -36,13 +33,15 @@ include_directories(
 # Create lists for all the sources, headers and libraries needed
 set(PROJECT_SOURCES
     src/main.cpp
-    src/ShaderProgram.cpp
-    src/Window.cpp
-    src/Camera.cpp
-    src/Mesh.cpp
-    src/GameState.cpp
     src/Game.cpp
-    src/MainState.cpp
+    src/Camera.cpp
+
+    src/graphics/ShaderProgram.cpp
+    src/graphics/Window.cpp
+    src/graphics/Mesh.cpp
+
+    src/states/GameState.cpp
+    src/states/MainState.cpp
     )
 
 set(PROJECT_LIBRARIES
