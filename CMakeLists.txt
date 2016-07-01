@@ -57,9 +57,10 @@ add_definitions(
     -DGLEW_STATIC
     -D_CRT_SECURE_NO_WARNINGS)
 
-# Copy across asset files if any have been changed
-file(COPY assets DESTINATION .)
-
 # Create, build and link the one target executable
 add_executable(DungeonWarrior ${PROJECT_SOURCES})
 target_link_libraries(DungeonWarrior ${PROJECT_LIBRARIES})
+
+# Copy across asset files if any have been changed
+add_custom_command(TARGET DungeonWarrior POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets)
