@@ -6,8 +6,7 @@ using namespace std;
 #include <states/MainState.h>
 #include <Constants.h>
 
-MainState::MainState() : GameState("Main") {
-}
+MainState::MainState() : GameState("Main") { }
 
 void MainState::init() {
     GameState::init();
@@ -25,14 +24,24 @@ void MainState::init() {
         0, 1, 0
     };
 
+    vector<float> textureCoords = {
+        0, 0,
+        0, 1,
+        1, 1,
+        1, 0
+    };
+
     vector<int> indices = {
         0, 1, 3,
         3, 1, 2
     };
 
-    mesh = new Mesh(vertices, colours, indices);
+    mesh = new Mesh(vertices, colours, textureCoords, indices);
     camera = new Camera(4.0f/3, vec3(0, 0, 5), 0, M_PI);
     shader= new ShaderProgram("assets/shaders/SimpleVertexShader.txt","assets/shaders/SimpleFragmentShader.txt");
+
+    texture = new Texture("assets/wall.png");
+    textureID = glGetUniformLocation(shader->getProgramID(), "textureSampler");
     matrixID = glGetUniformLocation(shader->getProgramID(), "mvp");
 }
 
@@ -48,7 +57,7 @@ void MainState::resize(int width, int height) {
 }
 
 
-void MainState::keyCallback(int key, int action, int scancode, int mods) {
+void MainState::keyCallback(int key, int scancode, int action, int mods) {
     if (action != GLFW_PRESS) return;
 
     float x = 0,y = 0,z = 0;
@@ -58,6 +67,7 @@ void MainState::keyCallback(int key, int action, int scancode, int mods) {
     if (key == GLFW_KEY_S) y--;
     if (key == GLFW_KEY_Z) z++;
     if (key == GLFW_KEY_X) z--;
+
 
     if (x || y || z) {
         camera->translate(x, y, z);
@@ -87,7 +97,12 @@ void MainState::render(float delta) {
     }
 
     shader->bind();
+    texture->bind();
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera->getProjectionViewMatrix()[0][0]);
+    glUniform1i(textureID, 0);
+
     mesh->render();
+
+    texture->unbind();
     shader->unbind();
 }

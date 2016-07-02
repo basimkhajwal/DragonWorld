@@ -3,7 +3,7 @@ using namespace std;
 
 #include <graphics/Mesh.h>
 
-Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const vector<int>& indices) {
+Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const vector<float>& textureCoords, const vector<int>& indices) {
 
     static int meshId = 0;
     printf("MESH:\t\tCreating new mesh id: %d\n", meshId++);
@@ -17,6 +17,7 @@ Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const ve
     indexBufferID = createStaticVBO(indices, GL_ELEMENT_ARRAY_BUFFER);
     vertexBufferID = bindBufferToAttribute(vertices, 0, 3);
     colourBufferID = bindBufferToAttribute(colours, 1, 3);
+    textureBufferID = bindBufferToAttribute(textureCoords, 2, 2);
 
     /* Unbind VAO and VBO's */
     glBindVertexArray(0);

@@ -64,6 +64,9 @@ namespace game {
 
             /* Set OpenGL flags */
             glEnable(GL_DEPTH_TEST);
+            glEnable(GL_TEXTURE_2D);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_CULL_FACE);
             glDepthFunc(GL_LESS);
             glClearColor(0.0f, 0.0f, 0.4f, 1.0f);
@@ -105,9 +108,11 @@ namespace game {
 
         mainLoop();
 
+        destroyGame();
         return 0;
     }
 
+    /* TODO: fix destructor problem with state*/
     void setState(GameState* nextState) {
         if (state != nullptr) delete state;
         state = nextState;

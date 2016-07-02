@@ -14,7 +14,7 @@ public:
 
     /* Listener functions */
     virtual void resize(int width, int height);
-    virtual void keyCallback(int key, int action, int scancode, int mods) {  }
+    virtual void keyCallback(int key, int scancode, int action, int mods) {  }
 
     /* Focus listeners */
     virtual void pause();

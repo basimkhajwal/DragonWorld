@@ -14,6 +14,9 @@ public:
 
     Texture(const char* filePath);
     ~Texture();
+
+    void bind();
+    void unbind();
         
     GLuint getTextureId() { return textureId; }
     int getWidth() { return width; }

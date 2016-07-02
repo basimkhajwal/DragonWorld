@@ -9,7 +9,7 @@ Texture::Texture(const char* filePath) {
 
     /* Load image data*/
     printf("TEXTURE:\tLoading texture %s\n", filePath);
-    unsigned char* imageData = SOIL_load_image(filePath, &width, &height, 0, SOIL_LOAD_RGB);
+    unsigned char* imageData = SOIL_load_image(filePath, &width, &height, 0, SOIL_LOAD_RGBA);
 
     /* Check for error */
     if (imageData == NULL) {
@@ -22,7 +22,7 @@ Texture::Texture(const char* filePath) {
     glGenTextures(1, &textureId);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureId);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, imageData);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
 
     /* Free the data */
     SOIL_free_image_data(imageData);
@@ -36,4 +36,13 @@ Texture::Texture(const char* filePath) {
 
 Texture::~Texture() {
     glDeleteTextures(1, &textureId);
+}
+
+void Texture::bind() {
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textureId);
+}
+
+void Texture::unbind() {
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
