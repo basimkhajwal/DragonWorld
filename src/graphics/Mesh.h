@@ -12,7 +12,9 @@ class Mesh {
     int vertexCount;
 
     GLuint bindBufferToAttribute(const vector<float>& data, int attribPointer, int attribSize);
-    GLuint createIndexBuffer(const vector<int>& indices);
+
+    template <typename T>
+    GLuint createStaticVBO(const vector<T>& data, GLenum type);
 public:
 
     Mesh (const vector<float>& vertices, const vector<float>& colours, const vector<int>& indices);

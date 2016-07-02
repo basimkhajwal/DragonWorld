@@ -1,6 +1,7 @@
-#include <graphics/Mesh.h>
-
 #include <cstdio>
+using namespace std;
+
+#include <graphics/Mesh.h>
 
 Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const vector<int>& indices) {
 
@@ -13,7 +14,7 @@ Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const ve
     glBindVertexArray(vaoID);
 
     /* Create the index buffer and the attribute buffers */
-    indexBufferID = createIndexBuffer(indices);
+    indexBufferID = createStaticVBO(indices, GL_ELEMENT_ARRAY_BUFFER);
     vertexBufferID = bindBufferToAttribute(vertices, 0, 3);
     colourBufferID = bindBufferToAttribute(colours, 1, 3);
 
@@ -24,7 +25,6 @@ Mesh::Mesh(const vector<float>& vertices, const vector<float>& colours, const ve
 }
 
 Mesh::~Mesh() {
-
     glBindVertexArray(0);
     glDeleteVertexArrays(1, &vaoID);
     
@@ -34,25 +34,18 @@ Mesh::~Mesh() {
 }
 
 GLuint Mesh::bindBufferToAttribute(const vector<float>& data, int attribPointer, int attribSize) {
-
-    GLuint vboId;
-    glGenBuffers(1, &vboId);
-
-    glBindBuffer(GL_ARRAY_BUFFER, vboId);
-    glBufferData(GL_ARRAY_BUFFER, ((int) data.size()) * sizeof(data[0]), &data[0], GL_STATIC_DRAW);
+    GLuint vboId = createStaticVBO(data, GL_ARRAY_BUFFER);
     glVertexAttribPointer(attribPointer, attribSize, GL_FLOAT, GL_FALSE, 0, (GLvoid*) 0);
     glEnableVertexAttribArray(attribPointer);
-
     return vboId;
 }
 
-GLuint Mesh::createIndexBuffer(const vector<int>& indices) {
-
+template <typename T>
+GLuint Mesh::createStaticVBO(const vector<T>& data, GLenum type) {
     GLuint vboId;
     glGenBuffers(1, &vboId);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vboId);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, ((int) indices.size()) * sizeof(indices[0]), &indices[0], GL_STATIC_DRAW);
-    
+    glBindBuffer(type, vboId);
+    glBufferData(type, ((int) data.size()) * sizeof(data[0]), &data[0], GL_STATIC_DRAW);
     return vboId;
 }
 

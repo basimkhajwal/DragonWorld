@@ -28,7 +28,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/external/glfw-3.2/include
     ${CMAKE_SOURCE_DIR}/external/glew-1.13.0/include
     ${CMAKE_SOURCE_DIR}/external/glm
-    ${CMAKE_SOURCE_DIR}/external/soil
+    ${CMAKE_SOURCE_DIR}/external/soil/src
     )
 
 # Create lists for all the sources, headers and libraries needed
@@ -40,6 +40,7 @@ set(PROJECT_SOURCES
     src/graphics/ShaderProgram.cpp
     src/graphics/Window.cpp
     src/graphics/Mesh.cpp
+    src/graphics/Texture.cpp
 
     src/states/GameState.cpp
     src/states/MainState.cpp
