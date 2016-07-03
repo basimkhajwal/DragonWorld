@@ -51,7 +51,5 @@ GLuint Mesh::createStaticVBO(const vector<T>& data, GLenum type) {
 }
 
 void Mesh::render() {
-    glBindVertexArray(vaoID);
     glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_INT, (GLvoid*) 0);
-    glBindVertexArray(0);
 }

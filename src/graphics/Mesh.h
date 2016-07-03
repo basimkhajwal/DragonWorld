@@ -20,6 +20,14 @@ public:
     Mesh (const vector<float>& vertices, const vector<float>& colours, const vector<float>& textureCoords, const vector<int>& indices);
     ~Mesh();
 
-    void render();
+    /* Render and bind calls combined*/
+    void fullRender() {
+        bind();
+        render();
+        unbind();
+    }
     
+    void bind() { glBindVertexArray(vaoID); }
+    void unbind() { glBindVertexArray(0); }
+    void render();
 };

@@ -94,7 +94,7 @@ void MainState::render(float delta) {
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera->getProjectionViewMatrix()[0][0]);
     glUniform1i(textureID, 0);
 
-    mesh->render();
+    mesh->fullRender();
 
     texture->unbind();
     shader->unbind();
