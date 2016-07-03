@@ -44,6 +44,10 @@ set(PROJECT_SOURCES
 
     src/states/GameState.cpp
     src/states/MainState.cpp
+
+    src/systems/GridRenderSystem.cpp
+
+    src/utils/FPSLogger.cpp
     )
 
 set(PROJECT_LIBRARIES

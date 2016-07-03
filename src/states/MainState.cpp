@@ -87,14 +87,7 @@ void MainState::keyCallback(int key, int scancode, int action, int mods) {
 
 void MainState::render(float delta) {
 
-    currentTime += delta;
-    framesCounted++;
-
-    if (currentTime >= 1) {
-        currentTime = 0;
-        printf("FPS-LOG:\t%d\n", framesCounted);
-        framesCounted = 0;
-    }
+    logger.log(delta);
 
     shader->bind();
     texture->bind();

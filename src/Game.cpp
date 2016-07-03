@@ -1,4 +1,4 @@
-#// Include standard headers
+// Include standard headers
 #include <cstdio>
 #include <cmath>
 #include <cstdlib>
@@ -27,7 +27,7 @@ namespace game {
         
         Window *window = nullptr;
         GameState* state = nullptr;
-
+        GameState* nextState = nullptr;
         bool lostFocus = false;
 
         void keyCallback(GLFWwindow* w, int key, int scancode, int action, int mode) {
@@ -95,6 +95,13 @@ namespace game {
                 window->update();
                 window->clear();
                 state->render(delta);
+
+                if (nextState != nullptr) {
+                    delete state;
+                    state = nextState;
+                    state->init();
+                    nextState = nullptr;
+                }
             }
         }
 
@@ -105,8 +112,10 @@ namespace game {
     }
 
     int runGame(GameState* startState) {
+
         initGame();
-        setState(startState);
+        state = startState;
+        state->init();
 
         mainLoop();
 
@@ -114,13 +123,7 @@ namespace game {
         return 0;
     }
 
-    /* TODO: fix destructor problem with state*/
-    void setState(GameState* nextState) {
-        if (state != nullptr) delete state;
-        state = nextState;
-        state->init();
-    }
-
+    void setState(GameState* newState) { nextState = newState; }
     GameState* getState() { return state; }
 }
 

@@ -6,17 +6,19 @@
 #include <graphics/Texture.h>
 #include <graphics/Mesh.h>
 #include <graphics/ShaderProgram.h>
+#include <utils/FPSLogger.h>
 
 class MainState : public GameState {
 
     Mesh* mesh;
-    Camera* camera;
-    ShaderProgram* shader;
-    GLuint matrixID, textureID;
     Texture* texture;
 
-    float currentTime = 0;
-    int framesCounted = 0;
+    Camera* camera;
+    ShaderProgram* shader;
+
+    FPSLogger logger;
+
+    GLuint matrixID, textureID;
 
 public:
 
