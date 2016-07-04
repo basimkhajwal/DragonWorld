@@ -34,20 +34,31 @@ include_directories(
 # Create lists for all the sources, headers and libraries needed
 set(PROJECT_SOURCES
     src/main.cpp
+    src/Constants.h
     src/Game.cpp
+    src/Game.h
     src/Camera.cpp
+    src/Camera.h
 
     src/graphics/ShaderProgram.cpp
+    src/graphics/ShaderProgram.h
     src/graphics/Window.cpp
+    src/graphics/Window.h
     src/graphics/Mesh.cpp
+    src/graphics/Mesh.h
     src/graphics/Texture.cpp
+    src/graphics/Texture.h
 
     src/states/GameState.cpp
+    src/states/GameState.h
     src/states/MainState.cpp
+    src/states/MainState.h
 
     src/systems/GridRenderSystem.cpp
+    src/systems/GridRenderSystem.h
 
     src/utils/FPSLogger.cpp
+    src/utils/FPSLogger.h
     )
 
 set(PROJECT_LIBRARIES
@@ -65,6 +76,13 @@ add_definitions(
 # Create, build and link the one target executable
 add_executable(DungeonWarrior ${PROJECT_SOURCES})
 target_link_libraries(DungeonWarrior ${PROJECT_LIBRARIES})
+
+# Set source groups for folders in Visual Studio
+source_group(src REGULAR_EXPRESSION "src/*")
+source_group(src\\graphics\\ REGULAR_EXPRESSION "src/graphics/*")
+source_group(src\\states\\ REGULAR_EXPRESSION "src/states/*")
+source_group(src\\systems\\ REGULAR_EXPRESSION "src/systems/*")
+source_group(src\\utils\\ REGULAR_EXPRESSION "src/utils/*")
 
 # Copy across asset files if any have been changed
 add_custom_command(TARGET DungeonWarrior POST_BUILD
