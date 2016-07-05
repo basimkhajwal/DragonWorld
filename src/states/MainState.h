@@ -6,6 +6,7 @@
 #include <graphics/Texture.h>
 #include <graphics/Mesh.h>
 #include <graphics/ShaderProgram.h>
+#include <systems/GridRenderSystem.h>
 #include <utils/FPSLogger.h>
 
 class MainState : public GameState {
@@ -15,6 +16,7 @@ class MainState : public GameState {
 
     Camera* camera;
     ShaderProgram* shader;
+    GridRenderSystem* gridRenderer;
 
     FPSLogger logger;
 

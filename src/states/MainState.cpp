@@ -11,9 +11,9 @@ MainState::MainState() : GameState("Main") { }
 void MainState::init() {
     GameState::init();
     vector<float> vertices = {
-        -1, 1, 0,
-        -1, -1, 0,
-        1, -1, 0,
+        0, 1, 0,
+        0, 0, 0,
+        1, 0, 0,
         1, 1, 0
     };
 
@@ -40,15 +40,18 @@ void MainState::init() {
     camera = new Camera(4.0f/3, vec3(0, 0, 5), 0, M_PI);
     shader= new ShaderProgram("assets/shaders/SimpleVertexShader.txt","assets/shaders/SimpleFragmentShader.txt");
 
-    texture = new Texture("assets/wall.png");
+    texture = new Texture("assets/wall.jpg");
     textureID = glGetUniformLocation(shader->getProgramID(), "textureSampler");
     matrixID = glGetUniformLocation(shader->getProgramID(), "mvp");
+
+    gridRenderer = new GridRenderSystem(5, 5, "1111110001100011000111111", mesh, matrixID);
 }
 
 MainState::~MainState() {
     delete mesh;
     delete camera;
     delete shader;
+    delete gridRenderer;
 }
 
 void MainState::resize(int width, int height) {
@@ -91,10 +94,11 @@ void MainState::render(float delta) {
 
     shader->bind();
     texture->bind();
-    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &camera->getProjectionViewMatrix()[0][0]);
     glUniform1i(textureID, 0);
 
-    mesh->fullRender();
+    mesh->bind();
+    gridRenderer->render(delta, camera->getProjectionViewMatrix());
+    mesh->unbind();
 
     texture->unbind();
     shader->unbind();
